@@ -15,7 +15,7 @@ const Search = () => {
 
 	const { isFetching, isFetched, isError } = useQuery({
 		queryKey: ['search', query],
-		queryFn: async () => searchBooks(query, 5),
+		queryFn: async () => searchBooks(query),
 		enabled: !!query,
 		select: (data) => {
 			if (!Array.isArray(data)) return data;

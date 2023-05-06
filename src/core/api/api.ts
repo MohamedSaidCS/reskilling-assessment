@@ -13,8 +13,8 @@ export const updateBook = async (bookId: string, shelf: Shelves) => {
 	return response.data;
 };
 
-export const searchBooks = async (query: string, maxResults: number) => {
-	const response = await axiosInstance.post('search', { query, maxResults });
+export const searchBooks = async (query: string) => {
+	const response = await axiosInstance.post('search', { query });
 	const books: Book[] | { error: string; items: [] } = response.data.books;
 	return books;
 };

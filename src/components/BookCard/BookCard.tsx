@@ -42,9 +42,7 @@ const BookCard: FC<BookCardProps> = ({ book }) => {
 					</div>
 					<div className='book-shelf-changer'>
 						<select value={book.shelf || 'none'} onChange={onChangeHandler} disabled={loading}>
-							<option value='none' disabled>
-								Move to...
-							</option>
+							<option disabled>Move to...</option>
 							<option value='currentlyReading'>Currently Reading</option>
 							<option value='wantToRead'>Want to Read</option>
 							<option value='read'>Read</option>
