@@ -10,6 +10,60 @@ body,
 .app {
   background: white;
 }
+button {
+  outline: 0;
+  cursor: pointer;
+  border: 0;
+  padding: 7px 16px;
+  min-height: 36px;
+  min-width: 36px;
+  color: white;
+  background: #60ac5d;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* auth page */
+
+.auth-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-container h1 {
+  color: #60ac5d;
+  font-size: 2.5rem;
+  margin: 0 0 1rem 0;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1rem;
+}
+
+.auth-form .form-control {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form .form-control label {
+  font-size: 1.25rem;
+}
+
+.auth-form .form-control input {
+  font-size: 1.2rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 0.5rem;
+  outline: none;
+}
 
 /* main page */
 
@@ -17,6 +71,10 @@ body,
   padding: 10px 0;
   background: #2e7c31;
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 1rem;
 }
 .list-books-title h1 {
   font-weight: 400;
