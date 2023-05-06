@@ -1,11 +1,28 @@
-import { FC } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import { Book } from '../../core/types/book';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { updateBook } from '../../core/api/api';
+import { Shelves } from '../../core/types/shelves';
 
 interface BookCardProps {
 	book: Book;
 }
 
 const BookCard: FC<BookCardProps> = ({ book }) => {
+	const queryClient = useQueryClient();
+	const [loading, setLoading] = useState(false);
+
+	const bookMutation = useMutation({
+		mutationFn: ({ bookId, shelf }: { bookId: string; shelf: Shelves }) => updateBook(bookId, shelf),
+		onMutate: () => setLoading(true),
+		onSuccess: () => queryClient.invalidateQueries({ queryKey: ['books'] }),
+		onSettled: () => setLoading(false),
+	});
+
+	const onChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+		bookMutation.mutate({ bookId: book.id, shelf: e.target.value as Shelves });
+	};
+
 	return (
 		<li>
 			<div className='book'>
@@ -17,9 +34,11 @@ const BookCard: FC<BookCardProps> = ({ book }) => {
 							height: 193,
 							backgroundImage: `url("${book.imageLinks.smallThumbnail}")`,
 						}}
-					></div>
+					>
+						{loading && <div className='book-cover-loading'>Loading...</div>}
+					</div>
 					<div className='book-shelf-changer'>
-						<select>
+						<select value={book.shelf} onChange={onChangeHandler} disabled={loading}>
 							<option value='none' disabled>
 								Move to...
 							</option>

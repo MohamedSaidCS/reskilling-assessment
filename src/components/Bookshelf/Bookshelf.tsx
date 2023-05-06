@@ -8,7 +8,7 @@ interface BookShelfProps {
 	books: Book[];
 }
 
-const Bookshelf: FC<BookShelfProps> = ({ title, isLoading, books }) => {
+const BookShelf: FC<BookShelfProps> = ({ title, isLoading, books }) => {
 	return (
 		<div className='bookshelf'>
 			<h2 className='bookshelf-title'>{title}</h2>
@@ -27,4 +27,4 @@ const Bookshelf: FC<BookShelfProps> = ({ title, isLoading, books }) => {
 	);
 };
 
-export default Bookshelf;
+export default BookShelf;

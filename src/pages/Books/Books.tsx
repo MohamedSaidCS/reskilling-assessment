@@ -3,7 +3,7 @@ import { Book } from '../../core/types/book';
 import { getAllBooks } from '../../core/api/api';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header';
-import Bookshelf from '../../components/Bookshelf/Bookshelf';
+import Bookshelf from '../../components/BookShelf/BookShelf';
 
 type Books = { currentlyReading: Book[]; wantToRead: Book[]; read: Book[] };
 
