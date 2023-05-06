@@ -3,6 +3,7 @@ import { Book } from '../../core/types/book';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updateBook } from '../../core/api/api';
 import { Shelves } from '../../core/types/shelves';
+import placeholder from '../../assets/images/placeholder.png';
 
 interface BookCardProps {
 	book: Book;
@@ -32,13 +33,15 @@ const BookCard: FC<BookCardProps> = ({ book }) => {
 						style={{
 							width: 128,
 							height: 193,
-							backgroundImage: `url("${book.imageLinks.smallThumbnail}")`,
+							backgroundImage: `url("${book.imageLinks?.smallThumbnail || placeholder}")`,
+							backgroundSize: 'cover',
+							backgroundPosition: 'center',
 						}}
 					>
 						{loading && <div className='book-cover-loading'>Loading...</div>}
 					</div>
 					<div className='book-shelf-changer'>
-						<select value={book.shelf} onChange={onChangeHandler} disabled={loading}>
+						<select value={book.shelf || 'none'} onChange={onChangeHandler} disabled={loading}>
 							<option value='none' disabled>
 								Move to...
 							</option>
@@ -50,7 +53,7 @@ const BookCard: FC<BookCardProps> = ({ book }) => {
 					</div>
 				</div>
 				<div className='book-title'>{book.title}</div>
-				<div className='book-authors'>{book.authors.join(', ')}</div>
+				<div className='book-authors'>{book.authors?.join(', ') || 'No Author'}</div>
 			</div>
 		</li>
 	);

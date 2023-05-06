@@ -20,6 +20,7 @@ const BookShelf: FC<BookShelfProps> = ({ title, isLoading, books }) => {
 						{books.map((book) => (
 							<BookCard key={book.id} book={book} />
 						))}
+						{books.length === 0 && <div>Shelf is empty.</div>}
 					</ol>
 				)}
 			</div>

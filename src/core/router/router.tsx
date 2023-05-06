@@ -5,6 +5,7 @@ import Book from '../../pages/Book/Book';
 import Search from '../../pages/Search/Search';
 import { useAppSelector } from '../store/hooks/useAppSelector';
 import { getAuthState } from '../store/slices/authSlice';
+import Wrapper from '../../pages/Wrapper/Wrapper';
 
 const Router = () => {
 	const { loggedIn } = useAppSelector(getAuthState);
@@ -14,12 +15,12 @@ const Router = () => {
 
 		{
 			path: '/',
-			element: loggedIn ? <Books /> : <Navigate to={'/auth'} />,
-			children: [{ path: ':id', element: <Book /> }],
-		},
-		{
-			path: '/search',
-			element: loggedIn ? <Search /> : <Navigate to={'/auth'} />,
+			element: loggedIn ? <Wrapper /> : <Navigate to={'/auth'} />,
+			children: [
+				{ index: true, element: <Books /> },
+				{ path: ':id', element: <Book /> },
+				{ path: 'search', element: <Search /> },
+			],
 		},
 	]);
 

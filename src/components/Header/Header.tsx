@@ -1,6 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useAppDispatch } from '../../core/store/hooks/useAppDispatch';
 import { logout } from '../../core/store/slices/authSlice';
+import { resetBooks } from '../../core/store/slices/booksSlice';
 
 const Header = () => {
 	const dispatch = useAppDispatch();
@@ -9,6 +10,7 @@ const Header = () => {
 	const logoutHandler = () => {
 		queryClient.clear();
 		localStorage.clear();
+		dispatch(resetBooks());
 		dispatch(logout());
 	};
 

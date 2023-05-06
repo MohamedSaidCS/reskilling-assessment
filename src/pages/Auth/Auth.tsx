@@ -4,11 +4,16 @@ import { login } from '../../core/store/slices/authSlice';
 
 const Auth = () => {
 	const [username, setUsername] = useState('');
+	const [error, setError] = useState(false);
 	const dispatch = useAppDispatch();
 
 	const formSubmitHandler = (e: FormEvent) => {
 		e.preventDefault();
-		if (!username) return;
+		setError(false);
+		if (!username) {
+			setError(true);
+			return;
+		}
 		dispatch(login(username));
 		localStorage.setItem('token', username);
 	};
@@ -23,6 +28,7 @@ const Auth = () => {
 				</div>
 				<button>Login</button>
 			</form>
+			{error && <p style={{ color: 'red' }}>Please enter a username.</p>}
 		</div>
 	);
 };
