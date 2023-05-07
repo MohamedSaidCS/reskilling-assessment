@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import BookCard from './BookCard';
 import { Book } from '../../core/types/book';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('<BookCard />', () => {
 	test('test book without authors', () => {
@@ -17,7 +18,9 @@ describe('<BookCard />', () => {
 		};
 		render(
 			<QueryClientProvider client={new QueryClient()}>
-				<BookCard book={book} />
+				<MemoryRouter>
+					<BookCard book={book} />
+				</MemoryRouter>
 			</QueryClientProvider>
 		);
 		const noAuthorElement = screen.getByText('No Author');
@@ -37,7 +40,9 @@ describe('<BookCard />', () => {
 		};
 		render(
 			<QueryClientProvider client={new QueryClient()}>
-				<BookCard book={book} />
+				<MemoryRouter>
+					<BookCard book={book} />
+				</MemoryRouter>
 			</QueryClientProvider>
 		);
 		const shelf = screen.getByRole<HTMLOptionElement>('option', { name: 'Want to Read' });
