@@ -17,6 +17,7 @@ const Books = () => {
 	const { data, isLoading, isError } = useQuery({
 		queryKey: ['books'],
 		queryFn: getAllBooks,
+		staleTime: Infinity,
 		select: (data) =>
 			data.reduce<Books>(
 				(accumulator, currentValue) => {
@@ -30,19 +31,17 @@ const Books = () => {
 	if (isError) return <div>Error</div>;
 
 	return (
-		<div className='app'>
-			<div className='list-books'>
-				<Header />
-				<div className='list-books-content'>
-					{shelves.map((shelf) => (
-						<Bookshelf key={shelf.key} title={shelf.title} isLoading={isLoading} books={isLoading ? [] : data[shelf.key]} />
-					))}
-				</div>
-				<div className='open-search'>
-					<Link to={'/search'}>Add a book</Link>
-				</div>
+		<>
+			<Header />
+			<div className='list-books-content'>
+				{shelves.map((shelf) => (
+					<Bookshelf key={shelf.key} title={shelf.title} isLoading={isLoading} books={isLoading ? [] : data[shelf.key]} />
+				))}
 			</div>
-		</div>
+			<div className='open-search'>
+				<Link to={'/search'}>Add a book</Link>
+			</div>
+		</>
 	);
 };
 

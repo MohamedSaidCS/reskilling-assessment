@@ -18,7 +18,7 @@ const Router = () => {
 			element: loggedIn ? <Wrapper /> : <Navigate to={'/auth'} />,
 			children: [
 				{ index: true, element: <Books /> },
-				{ path: ':id', element: <Book /> },
+				{ path: 'book/:id', element: <Book /> },
 				{ path: 'search', element: <Search /> },
 			],
 		},

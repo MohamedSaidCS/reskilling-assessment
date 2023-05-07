@@ -4,11 +4,8 @@ body,
   height: 100%;
 }
 body {
-  line-height: 1.5;
-}
-body,
-.app {
   background: white;
+  line-height: 1.5;
 }
 button {
   outline: 0;
@@ -76,10 +73,15 @@ button {
   align-items: center;
   padding-inline: 1rem;
 }
-.list-books-title h1 {
+.list-books-title a {
+  font-size: 2rem;
+  text-decoration: none;
   font-weight: 400;
   margin: 0;
   color: white;
+}
+.list-books-title a:hover {
+  text-decoration: underline;
 }
 
 .list-books-content {
@@ -188,7 +190,13 @@ button {
   font-size: 0.8em;
 }
 .book-title {
+  display: inline-block;
   margin-top: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+.book-title:hover {
+  text-decoration: underline;
 }
 .book-authors {
   color: #999;
@@ -243,4 +251,61 @@ button {
   padding: 20px 10px 0;
   text-align: center;
   font-size: 0.8em;
+}
+
+/* book details page */
+
+.book-page {
+  padding: 0 10px 20px;
+}
+
+@media (min-width: 600px) {
+  .book-page {
+    padding: 0 20px 40px;
+  }
+}
+
+.book-page-title {
+  border-bottom: 1px solid #dedede;
+}
+
+.book-page-details-container {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.book-page-details-cover {
+  margin-inline: auto;
+  width: 50%;
+}
+
+.book-page-details {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+
+.book-detail {
+  display: grid;
+  grid-template-columns: 40% 60%;
+}
+
+.book-detail h3, .book-detail p {
+  margin: 0;
+}
+
+.book-detail h3 {
+  color: darkgreen;
+}
+
+
+@media (min-width: 600px) {
+  .book-page-details-container {
+    grid-template-columns: 300px 1fr;
+  }
+
+  .book-detail {
+    grid-template-columns: 15% 30%;
+  }
 }

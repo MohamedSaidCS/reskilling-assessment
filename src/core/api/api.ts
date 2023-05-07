@@ -8,6 +8,12 @@ export const getAllBooks = async () => {
 	return books;
 };
 
+export const getOneBook = async (bookId: string) => {
+	const response = await axiosInstance.get(`books/${bookId}`);
+	const book: Book = response.data.book;
+	return book;
+};
+
 export const updateBook = async (bookId: string, shelf: Shelves) => {
 	const response = await axiosInstance.put(`books/${bookId}`, { shelf });
 	return response.data;

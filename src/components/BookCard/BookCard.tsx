@@ -1,8 +1,8 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC } from 'react';
 import { Book } from '../../core/types/book';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updateBook } from '../../core/api/api';
 import { Shelves } from '../../core/types/shelves';
+import { Link } from 'react-router-dom';
+import useBookMutation from '../../core/hooks/useBookMutation';
 import placeholder from '../../assets/images/placeholder.png';
 
 interface BookCardProps {
@@ -10,15 +10,7 @@ interface BookCardProps {
 }
 
 const BookCard: FC<BookCardProps> = ({ book }) => {
-	const queryClient = useQueryClient();
-	const [loading, setLoading] = useState(false);
-
-	const bookMutation = useMutation({
-		mutationFn: ({ bookId, shelf }: { bookId: string; shelf: Shelves }) => updateBook(bookId, shelf),
-		onMutate: () => setLoading(true),
-		onSuccess: () => queryClient.invalidateQueries({ queryKey: ['books'] }),
-		onSettled: () => setLoading(false),
-	});
+	const bookMutation = useBookMutation();
 
 	const onChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
 		bookMutation.mutate({ bookId: book.id, shelf: e.target.value as Shelves });
@@ -28,7 +20,8 @@ const BookCard: FC<BookCardProps> = ({ book }) => {
 		<li>
 			<div className='book'>
 				<div className='book-top'>
-					<div
+					<Link
+						to={`/book/${book.id}`}
 						className='book-cover'
 						style={{
 							width: 128,
@@ -38,10 +31,10 @@ const BookCard: FC<BookCardProps> = ({ book }) => {
 							backgroundPosition: 'center',
 						}}
 					>
-						{loading && <div className='book-cover-loading'>Loading...</div>}
-					</div>
+						{bookMutation.isLoading && <div className='book-cover-loading'>Loading...</div>}
+					</Link>
 					<div className='book-shelf-changer'>
-						<select value={book.shelf || 'none'} onChange={onChangeHandler} disabled={loading}>
+						<select value={book.shelf || 'none'} onChange={onChangeHandler} disabled={bookMutation.isLoading}>
 							<option disabled>Move to...</option>
 							<option value='currentlyReading'>Currently Reading</option>
 							<option value='wantToRead'>Want to Read</option>
@@ -50,7 +43,9 @@ const BookCard: FC<BookCardProps> = ({ book }) => {
 						</select>
 					</div>
 				</div>
-				<div className='book-title'>{book.title}</div>
+				<Link to={`/book/${book.id}`} className='book-title'>
+					{book.title}
+				</Link>
 				<div className='book-authors'>{book.authors?.join(', ') || 'No Author'}</div>
 			</div>
 		</li>

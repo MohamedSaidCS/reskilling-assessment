@@ -2,6 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useAppDispatch } from '../../core/store/hooks/useAppDispatch';
 import { logout } from '../../core/store/slices/authSlice';
 import { resetBooks } from '../../core/store/slices/booksSlice';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 	const dispatch = useAppDispatch();
@@ -16,7 +17,7 @@ const Header = () => {
 
 	return (
 		<div className='list-books-title'>
-			<h1>MyReads</h1>
+			<Link to={'/'}>MyReads</Link>
 			<button onClick={logoutHandler}>Logout</button>
 		</div>
 	);
