@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import Bookshelf from '../../components/BookShelf/BookShelf';
 
-type Books = { currentlyReading: Book[]; wantToRead: Book[]; read: Book[] };
+type CategorizedBooks = { currentlyReading: Book[]; wantToRead: Book[]; read: Book[] };
 
-const shelves: { title: string; key: keyof Books }[] = [
+const shelves: { title: string; key: keyof CategorizedBooks }[] = [
 	{ title: 'Currently Reading', key: 'currentlyReading' },
 	{ title: 'Want to Read', key: 'wantToRead' },
 	{ title: 'Read', key: 'read' },
@@ -19,7 +19,7 @@ const Books = () => {
 		queryFn: getAllBooks,
 		staleTime: Infinity,
 		select: (data) =>
-			data.reduce<Books>(
+			data.reduce<CategorizedBooks>(
 				(accumulator, currentValue) => {
 					accumulator[currentValue.shelf].push(currentValue);
 					return accumulator;
