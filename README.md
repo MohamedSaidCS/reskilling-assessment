@@ -9,6 +9,7 @@
 -   [React Query](https://tanstack.com/query/latest/)
 -   [Redux Toolkit](https://redux-toolkit.js.org/)
 -   [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
+-   [Mock Service Worker](https://mswjs.io/)
 
 Project was scaffolded using [Create React App](https://create-react-app.dev/) and used the stater code from the assessment's [starter repo](https://github.com/udacity/nd0191-c1-myreads).
 
