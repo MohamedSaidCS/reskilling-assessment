@@ -5,7 +5,7 @@ export type Book = {
 	title: string;
 	subtitle: string;
 	authors?: string[];
-	imageLinks: { smallThumbnail: string; thumbnail: string };
+	imageLinks?: { smallThumbnail: string; thumbnail: string };
 	shelf: Shelves;
 	publishedDate: string;
 	publisher: string;

@@ -5,6 +5,7 @@ import { ChangeEvent } from 'react';
 import { Shelves } from '../../core/types/shelves';
 import Header from '../../components/Header/Header';
 import useBookMutation from '../../core/hooks/useBookMutation';
+import placeholder from '../../assets/images/placeholder.png';
 
 const Book = () => {
 	const { id } = useParams();
@@ -45,7 +46,7 @@ const Book = () => {
 					<>
 						<h2 className='book-page-title'>{book.title}</h2>
 						<div className='book-page-details-container'>
-							<img className='book-page-details-cover' src={book.imageLinks.thumbnail} />
+							<img className='book-page-details-cover' src={book.imageLinks?.thumbnail || placeholder} alt={book.title} />
 							<div className='book-page-details'>
 								<div className='book-detail'>
 									<h3>Title</h3>

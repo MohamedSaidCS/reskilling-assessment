@@ -12,7 +12,7 @@ function App() {
 		const token = localStorage.getItem('token');
 		if (token) dispatch(login(token));
 		setInitialLoad(false);
-	}, []);
+	}, [dispatch]);
 
 	if (initialLoad) return <></>;
 

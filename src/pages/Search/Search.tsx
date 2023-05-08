@@ -2,18 +2,16 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { searchBooks } from '../../core/api/api';
-import { Book } from '../../core/types/book';
-import BookCard from '../../components/BookCard/BookCard';
 import { useAppSelector } from '../../core/store/hooks/useAppSelector';
 import { getBooks } from '../../core/store/slices/booksSlice';
+import BookCard from '../../components/BookCard/BookCard';
 
 const Search = () => {
 	const [search, setSearch] = useState('');
 	const [query, setQuery] = useState('');
-	const [books, setBooks] = useState<Book[]>([]);
 	const myBooks = useAppSelector(getBooks);
 
-	const { isFetching, isFetched, isError } = useQuery({
+	const { data, isFetching, isFetched, isError } = useQuery({
 		queryKey: ['search', query],
 		queryFn: async () => searchBooks(query),
 		enabled: !!query,
@@ -26,16 +24,10 @@ const Search = () => {
 					return book;
 				});
 		},
-		onSuccess: (data) => {
-			if (Array.isArray(data)) setBooks(data);
-			else setBooks([]);
-		},
 	});
 
-	let timeout: NodeJS.Timeout;
-
 	useEffect(() => {
-		timeout = setTimeout(() => setQuery(search), 500);
+		const timeout = setTimeout(() => setQuery(search), 500);
 		return () => {
 			clearTimeout(timeout);
 		};
@@ -57,9 +49,9 @@ const Search = () => {
 				<ol className='books-grid'>
 					{isFetching && <p>Searching...</p>}
 
-					{isFetched &&
-						!isFetching &&
-						(books.length === 0 ? <p>No results found.</p> : books.map((book) => <BookCard key={book.id} book={book} />))}
+					{isFetched && !Array.isArray(data) && <p>No results found.</p>}
+
+					{isFetched && Array.isArray(data) && data.map((book) => <BookCard key={book.id} book={book} />)}
 				</ol>
 			</div>
 		</div>
