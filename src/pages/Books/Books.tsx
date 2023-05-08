@@ -3,7 +3,7 @@ import { Book } from '../../core/types/book';
 import { getAllBooks } from '../../core/api/api';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header';
-import Bookshelf from '../../components/BookShelf/BookShelf';
+import BookShelf from '../../components/BookShelf/BookShelf';
 
 type CategorizedBooks = { currentlyReading: Book[]; wantToRead: Book[]; read: Book[] };
 
@@ -35,7 +35,7 @@ const Books = () => {
 			<Header />
 			<div className='list-books-content'>
 				{shelves.map((shelf) => (
-					<Bookshelf key={shelf.key} title={shelf.title} isLoading={isLoading} books={isLoading ? [] : data[shelf.key]} />
+					<BookShelf key={shelf.key} title={shelf.title} isLoading={isLoading} books={isLoading ? [] : data[shelf.key]} />
 				))}
 			</div>
 			<div className='open-search'>

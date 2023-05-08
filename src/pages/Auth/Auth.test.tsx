@@ -1,14 +1,13 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import Auth from './Auth';
-import { Provider } from 'react-redux';
-import { store } from '../../core/store/store';
+import { TestStoreProviderWrapper } from '../../test/utils/utils';
 
 describe('<Auth />', () => {
 	test('test login validation', () => {
 		render(
-			<Provider store={store}>
+			<TestStoreProviderWrapper>
 				<Auth />
-			</Provider>
+			</TestStoreProviderWrapper>
 		);
 		const button = screen.getByText('Login');
 		fireEvent.click(button);
