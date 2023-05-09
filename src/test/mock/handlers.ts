@@ -71,4 +71,8 @@ export const handlers = [
 
 		return res(ctx.status(200), ctx.json(response));
 	}),
+
+	rest.put(`${baseURL}/books/:bookId`, async (req, res, ctx) => {
+		return res(ctx.status(200), ctx.json({}));
+	}),
 ];
